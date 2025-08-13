@@ -29,7 +29,8 @@ exports.record = (req, res) => {
     to: req.body.to || currentDate,
     created_by: creator,
     user_id: req.body.USER_ID || null,
-    job_code: req.body.JOB_CODE || null
+    job_code: req.body.JOB_CODE || null,
+    worktype_id: req.body.WORKTYPE_ID || null
   });
 
   Reportjob.record(model, (err, data) => {

@@ -8,10 +8,12 @@ const Worklog = () => {
   const [worklogs, setWorklogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openDate, setOpenDate] = useState(null);
+  const [worktypeList, setWorktypeList] = useState([]);
 
   const [filterStartDate, setFilterStartDate] = useState('');
   const [filterEndDate, setFilterEndDate] = useState('');
   const [filterJobCode, setFilterJobCode] = useState('');
+  const [filterWorktype, setFilterWorktype] = useState('');
   const [dateList, setDateList] = useState(true);
 
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
@@ -58,6 +60,27 @@ const Worklog = () => {
     if (userId && token) fetchWorklogs();
   }, [userId, token]);
 
+  // ดึงประเภทงานทั้งหมด
+  useEffect(() => {
+    const fetchWorktypes = async () => {
+      try {
+        const res = await fetch('http://localhost:4000/v1/worktype/get', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const result = await res.json();
+        if (result.success) setWorktypeList(result.data);
+        else setWorktypeList([]);
+      } catch {
+        setWorktypeList([]);
+      }
+    };
+    if (token) fetchWorktypes();
+  }, [token]);
+
   const filteredWorklogs = worklogs.filter(item => {
     const workDate = item.WORK_DATE?.slice(0, 10);
     const passDate =
@@ -66,7 +89,9 @@ const Worklog = () => {
 
     const passJob = !filterJobCode || item.JOB_CODE?.toLowerCase().includes(filterJobCode.toLowerCase());
 
-    return passDate && passJob;
+    const passWorktype = !filterWorktype || String(item.WORKTYPE_ID) === String(filterWorktype);
+
+    return passDate && passJob && passWorktype;
   });
 
   const grouped = filteredWorklogs.reduce((acc, item) => {
@@ -109,6 +134,7 @@ const Worklog = () => {
           to: filterEndDate || "2100-01-01",
           USER_ID: userId,
           JOB_CODE: filterJobCode,
+          WORKTYPE_ID: filterWorktype,
         },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -143,12 +169,25 @@ const Worklog = () => {
             <input type="date" value={filterEndDate} onChange={e => setFilterEndDate(e.target.value)} className="border-2 border-gray-300 rounded-md px-2 py-1" />
           </div>
           <div>
+            <label className="block text-sm text-gray-600 mb-1">ประเภทงาน</label>
+            <select
+              className="border-2 border-gray-300 rounded-md px-2 h-9 focus:outline-none"
+              value={filterWorktype}
+              onChange={e => setFilterWorktype(e.target.value)}
+            >
+              <option value="">เลือกประเภทงาน</option>
+              {worktypeList.map(type => (
+                <option key={type.WORKTYPE_ID} value={type.WORKTYPE_ID}>{type.WORKTYPE_NAME}</option>
+              ))}
+            </select>
+          </div>
+          <div>
             <label className="block text-sm text-gray-600 mb-1">หมายเลขงาน</label>
             <input type="text" value={filterJobCode} onChange={e => setFilterJobCode(e.target.value)} className="w-35 border-2 border-gray-300 rounded-md px-2 py-1" placeholder="ค้นหา..." />
           </div>
           <button
             className="px-4 h-9 bg-blue-100 hover:bg-blue-200 text-blue-900 rounded-xl cursor-pointer"
-            onClick={() => { setFilterStartDate(''); setFilterEndDate(''); setFilterJobCode(''); }}
+            onClick={() => { setFilterStartDate(''); setFilterEndDate(''); setFilterJobCode(''); setFilterWorktype(''); }}
           >
             ล้างตัวกรอง
           </button>

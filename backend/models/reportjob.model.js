@@ -10,6 +10,7 @@ const Reportjob = function (model) {
   this.created_by = model.created_by;
   this.user_id = model.user_id;
   this.job_code = model.job_code;
+  this.worktype_id = model.worktype_id;
 };
 
 Reportjob.record = (newImport, result) => {
@@ -25,6 +26,7 @@ Reportjob.record = (newImport, result) => {
       request.input("REPORTJOB_STATUS", sqlType.VarChar, newImport.status);
       request.input("USER_ID", sqlType.VarChar, newImport.user_id);
       request.input("JOB_CODE", sqlType.VarChar, newImport.job_code);
+      request.input("WORKTYPE_ID", sqlType.VarChar, newImport.worktype_id);
 
       const datenow = new Date();
       const year = datenow.getFullYear();
@@ -49,11 +51,11 @@ Reportjob.record = (newImport, result) => {
               `INSERT INTO SYS_MT_REPORTJOB 
               (REPORTJOB_ID, REPORTJOB_FROMDATE, REPORTJOB_TODATE, REPORTJOB_REF,
                REPORTJOB_TYPE, REPORTJOB_STATUS,
-               CREATED_BY, CREATED_DATE, FLAG, USER_ID, JOB_CODE)
+               CREATED_BY, CREATED_DATE, FLAG, USER_ID, JOB_CODE, WORKTYPE_ID)
               VALUES 
               (@REPORTJOB_ID, @REPORTJOB_FROMDATE, @REPORTJOB_TODATE, @REPORTJOB_REF,
                @REPORTJOB_TYPE, @REPORTJOB_STATUS,
-               @CREATED_BY, GETDATE(), @FLAG, @USER_ID, @JOB_CODE)`,
+               @CREATED_BY, GETDATE(), @FLAG, @USER_ID, @JOB_CODE, @WORKTYPE_ID)`,
               (err, res) => {
                 if (err) {
                   result(err, null);
