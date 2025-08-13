@@ -4,7 +4,7 @@ const Title = () => {
   return (
     <div className="bg-gradient-to-b from-blue-50 to-white flex items-center justify-center">
       <div className="text-center mt-18">
-        <h1 className="text-blue-900 text-6xl font-bold mb-6">
+        <h1 className="text-blue-900 text-6xl font-bold mb-4">
           EXAT Daily System
         </h1>
         <p className="text-gray-700 text-lg font-medium mb-2">
