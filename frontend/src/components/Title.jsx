@@ -7,7 +7,7 @@ const Title = () => {
         <h1 className="text-blue-900 text-6xl font-bold mb-6">
           EXAT Daily System
         </h1>
-        <p className="text-gray-700 text-lg font-medium mb-4">
+        <p className="text-gray-700 text-lg font-medium mb-2">
           ระบบบันทึกการปฏิบัติงานรายวันสำหรับการจัดการและติดตามงานอย่างมีประสิทธิภาพ
         </p>
       </div>
