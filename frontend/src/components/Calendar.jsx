@@ -46,7 +46,7 @@ const getSpan = (startStr, endStr) => {
     return Math.round((endTime - startTime) / (1000 * 60 * 10));
 };
 
-const OldCalendar = () => {
+const Calendar = () => {
     const [worklogs, setWorklogs] = useState([]);
     const [dates, setDates] = useState([]);
     const navigate = useNavigate();
@@ -179,4 +179,4 @@ const OldCalendar = () => {
     );
 };
 
-export default OldCalendar;
+export default Calendar;

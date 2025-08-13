@@ -2,8 +2,8 @@ import React from 'react';
 
 const Title = () => {
   return (
-    <div className="bg-gradient-to-b from-blue-100 to-white flex items-center justify-center rounded-lg">
-      <div className="text-center mt-46">
+    <div className="bg-gradient-to-b from-blue-50 to-white flex items-center justify-center">
+      <div className="text-center mt-24">
         <h1 className="text-blue-900 text-6xl font-extrabold mb-6">
           EXAT Daily System
         </h1>

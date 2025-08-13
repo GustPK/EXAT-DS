@@ -1,12 +1,12 @@
 import React from 'react'
 import Title from '../components/Title'
-import OldCalendar from '../components/OldCalendar'
+import Calendar from '../components/Calendar'
 
 const Home = () => {
   return (
     <div>
       <Title/>
-      {/*<OldCalendar/>*/}
+      <Calendar/>
     </div>
   )
 }
