@@ -149,7 +149,7 @@ const Calendar = () => {
                                                     colSpan={span}
                                                     className="border-t border-b border-l border-r border-blue-900 px-1 py-3 min-h-[80px] text-center bg-blue-100 text-blue-900 font-medium hover:bg-blue-200 cursor-pointer"
                                                     onClick={() =>
-                                                        navigate(`/worklog/${log.WORKLOG_ID}`, { state: { worklog: log } })
+                                                        navigate(`/calendar/worklog/${log.WORKLOG_ID}`, { state: { worklog: log } })
                                                     }
                                                 >
                                                     <div className="text-xs">{log.JOB_CODE}</div>

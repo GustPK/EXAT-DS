@@ -15,6 +15,8 @@ import Assign from './pages/Assign';
 import SignUp from './pages/Signup';
 import EditWorklog from './pages/EditWorklog';
 import TeamEditWorklog from './pages/TeamEditWorklog';
+import CalendarWorklogDetail from './pages/CalendarWorklogdetail';
+import CalendarEditWorklog from './pages/CalendarEditWorklog';
 
 // PrivateRoute: redirect ไป /login ถ้าไม่มี token
 const PrivateRoute = ({ children }) => {
@@ -48,8 +50,10 @@ const App = () => {
         <Route path="/team" element={<PrivateRoute><Team /></PrivateRoute>} />
         <Route path="/worklog/:worklogId" element={<PrivateRoute><WorklogDetail /></PrivateRoute>} />
         <Route path="/team/worklog/:worklogId" element={<PrivateRoute><TeamWorklogDetail /></PrivateRoute>} />
+        <Route path="/calendar/worklog/:worklogId" element={<PrivateRoute><CalendarWorklogDetail /></PrivateRoute>} />
         <Route path="/editworklog/:worklogId" element={<PrivateRoute><EditWorklog /></PrivateRoute>} />
         <Route path="/team/editworklog/:worklogId" element={<PrivateRoute><TeamEditWorklog /></PrivateRoute>} />
+        <Route path="/calendar/editworklog/:worklogId" element={<PrivateRoute><CalendarEditWorklog /></PrivateRoute>} />
         <Route path="/user/:userId" element={<PrivateRoute><Userdetail /></PrivateRoute>} />
         <Route path="/assign/:userId" element={<PrivateRoute><Assign /></PrivateRoute>} />
       </Routes>
