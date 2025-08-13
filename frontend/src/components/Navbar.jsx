@@ -17,7 +17,7 @@ const Navbar = () => {
   if (!isSignedIn || location.pathname === '/login') return null;
 
   return (
-    <div className="flex items-center justify-end sm:justify-between py-4 font-medium">
+    <div className="flex items-center justify-end sm:justify-between py-4 xl:py-3 font-medium">
 
       <Link to="/" className="hidden sm:block">
         <img src={assets.logo} className="w-50" alt="logo" />
